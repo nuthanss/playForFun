@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Card, CardContent, Typography } from '@material-ui/core'
+import { Grid, Card, CardContent, Typography, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import { red } from '@mui/material/colors';
 
@@ -14,9 +14,9 @@ const useStyles = makeStyles((theme) => ({
     cardContent: {
         justifyContent: "center"
     },
-    cardo:{
+    cardo: {
         backgroundColor: red[200],
-        width: "200px"
+        width: "190px"
     }
 }))
 
@@ -30,15 +30,11 @@ export default function Cardo({ gamesObj, NavigateToGamePage }) {
 
 
     return (
-        <Grid item sm={3}>
-            <Card className={classes.cardo} onClick={moveToGame.bind(this, gamesObj.game)}>
-                <CardContent className={classes.cardContent}>
-                    <img src={`/assets/images/${gamesObj.img}`}
-                        width='160px' height='200px'
-                        style={{ marginRight: "10px" }}></img>
-                    <Typography className={classes.typo}><b>{gamesObj.game}</b></Typography>
-                </CardContent>
-            </Card>
-        </Grid>
+        <Card className={classes.cardo} onClick={moveToGame.bind(this, gamesObj.game)}>
+            <CardContent className={classes.cardContent}>
+                <Box component="img" src={`/assets/images/${gamesObj.img}`} style={{ width: 160, height: 200, marginRight: 10 }} />
+                <Typography className={classes.typo}><b>{gamesObj.game}</b></Typography>
+            </CardContent>
+        </Card>
     )
 }

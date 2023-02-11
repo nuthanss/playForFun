@@ -1,13 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { postSearchFilter } from '../redux/actions';
+import InputBase from '@material-ui/core/InputBase';
 
 export default function Header(props) {
   let navigate = useNavigate();
+  let dispatch = useDispatch();
 
   const [query, setquery] = useState("");
 
   function navigateTo(path) {
     navigate(`${path}`);
+  }
+
+
+  const setQueryFunc = e => {
+    setquery(e.target.value);
+    dispatch(postSearchFilter(e.target.value))
   }
 
   return (
@@ -17,11 +27,13 @@ export default function Header(props) {
           <h1 class="logo">
             <a onClick={navigateTo.bind(this, "home")}>PlayForFun</a>
           </h1>
-          <input
-            type="search"
+          <InputBase
+            placeholder="   Filter games here..."
             value={query}
-            onChange={(e) => props.GetSearch(e.target.value)}
+            style={{ backgroundColor: 'white', borderRadius: 5 }}
+            onChange={setQueryFunc}
           />
+
 
           {/* <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> */}
 

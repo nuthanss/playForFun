@@ -3,7 +3,6 @@ import { Container, Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { spacing } from "@mui/system";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -30,12 +29,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MathChallenge() {
-    const [systemAnswer, setSystemAnswer] = useState();
     const [score, setscore] = useState(0);
     const [isReset, setisReset] = useState(false);
 
     const [userAnswer, setUserAnswer] = useState();
-    const [time, setTime] = useState(10);
+    const [time, setTime] = useState(30);
     const [isStarted, setIsStarted] = useState(false);
 
     const [firstNum, setfirstNum] = useState("?");
@@ -45,7 +43,7 @@ export default function MathChallenge() {
     const classes = useStyles();
 
     const Timer = () => {
-        let count = 10;
+        let count = 30;
         const interval = setInterval(function () {
             count--;
             setTime(count);
@@ -61,11 +59,11 @@ export default function MathChallenge() {
     };
 
     const handleCalculate = (e) => {
-        if (e.target.innerHTML == "Start") {
+        if (e.target.innerHTML === "Start") {
             Timer()
             setIsStarted(true);
         }
-        else if (e.target.innerHTML == "Next") {
+        else if (e.target.innerHTML === "Next") {
             let sysAnswer = firstNum + secNum;
             console.log(`sysAnswer:  ${firstNum} + ${secNum} = ${sysAnswer}`);
             console.log(`userAnswer: ${firstNum} + ${secNum} = ${userAnswer}`);
@@ -76,14 +74,14 @@ export default function MathChallenge() {
                 }
                 );
             }
-        } else if (e.target.innerHTML == "Reset") {
+        } else if (e.target.innerHTML === "Reset") {
             setisReset(false);
             setIsStarted(false);
             setscore("");
             setfirstNum("?");
             setSecNum("?");
         }
-        if (!isStarted || (e.target.innerHTML == "Next")) {
+        if (!isStarted || (e.target.innerHTML === "Next")) {
             setUserAnswer("");
             setfirstNum(Math.floor(Math.random() * 10));
             setSecNum(Math.floor(Math.random() * 10));
@@ -94,9 +92,6 @@ export default function MathChallenge() {
 
     };
 
-    const handleNext = () => {
-
-    }
 
 
     return (
